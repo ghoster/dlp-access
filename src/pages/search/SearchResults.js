@@ -6,6 +6,7 @@ import Pagination from "../../components/Pagination";
 import SearchBar from "../../components/SearchBar";
 import SearchFacets from "./SearchFacets";
 import ViewBar from "../../components/ViewBar";
+import SortbyDropdown from "../../components/SortbyDropdown";
 import ItemsList from "./ItemsList";
 import { fetchLanguages } from "../../lib/fetchTools";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -171,39 +172,49 @@ class SearchResults extends Component {
               </div>
               <div id="content" className="col-lg-9 col-sm-12">
                 <div
-                  className="navbar navbar-light justify-content-between"
+                  className="navbar navbar-light"
                   id="search-tools"
                   role="region"
                   aria-label="Search Tools"
                   aria-controls="search-results"
                 >
-                  <div className="navbar-text text-dark">
+                  <div className="view-info">
                     <ItemsPaginationDisplay atBottom={false} />
+                    <div
+                      className="facet-button-navbar"
+                      onClick={this.updateModal}
+                    >
+                      <button
+                        type="button"
+                        data-toggle="tooltip"
+                        title="Filters"
+                        aria-label="Filters"
+                        aria-pressed={this.state.isActive}
+                      >
+                        <FontAwesomeIcon
+                          icon={faFilter}
+                          color="var(--themeHighlightColor)"
+                        />
+                      </button>
+                    </div>
                   </div>
                   <div
-                    className="facet-button-navbar"
-                    onClick={this.updateModal}
+                    className="collection-filters"
+                    role="group"
+                    aria-roledescription="Sort options"
                   >
-                    <button
-                      type="button"
-                      data-toggle="tooltip"
-                      title="Filters"
-                      aria-label="Filters"
-                      aria-pressed={this.state.isActive}
-                    >
-                      <FontAwesomeIcon
-                        icon={faFilter}
-                        color="var(--themeHighlightColor)"
-                      />
-                    </button>
+                    <SortbyDropdown
+                      siteSort={this.props.browseItems.sort}
+                      updateFormState={this.props.updateFormState}
+                    />
                   </div>
-                  <div className="form-inline view-options">
+                  <div className="view-options">
+                    <ResultsNumberDropdown setLimit={this.props.setLimit} />
                     <ViewBar
                       view={this.props.view}
                       updateFormState={this.props.updateFormState}
                       pageViews={["Gallery", "List", "Masonry"]}
                     />
-                    <ResultsNumberDropdown setLimit={this.props.setLimit} />
                   </div>
                   <div className="facet-navbar-section" aria-live="polite">
                     <FiltersDisplay />

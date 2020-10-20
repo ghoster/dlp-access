@@ -21,13 +21,28 @@ class SearchLoader extends Component {
       field: "title",
       view: "Gallery",
       q: "",
-      languages: null
+      languages: null,
+      sort: {
+        field: "title",
+        direction: "asc"
+      }
     };
   }
 
   updateFormState = (name, val) => {
-    const url = this.setParams(name, val);
-    this.props.history.push(`?${url}`);
+    if (name === "sort") {
+      this.setState(
+        {
+          [name]: val
+        },
+        function() {
+          this.loadItems();
+        }
+      );
+    } else {
+      const url = this.setParams(name, val);
+      this.props.history.push(`?${url}`);
+    }
   };
 
   setParams = (name, val) => {
@@ -144,14 +159,10 @@ class SearchLoader extends Component {
     });
     let options = {
       filter: { ...filters, ...searchInput },
-      sort: {
-        field: "title",
-        direction: "asc"
-      },
+      sort: this.state.sort,
       limit: this.state.limit,
       nextToken: this.state.nextTokens[this.state.page]
     };
-
     let searchResults = await fetchSearchResults(this, options);
     nextTokens[this.state.page + 1] = searchResults.nextToken;
     this.setState({
@@ -216,6 +227,7 @@ class SearchLoader extends Component {
             view={this.state.view}
             updateFormState={this.updateFormState}
             searchFacets={facetsData}
+            searchSorts={searchPageInfo.sort}
           />
         </div>
       );

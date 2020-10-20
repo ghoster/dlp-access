@@ -23,7 +23,6 @@ div.search-results div.row div#content div.navbar {
 
 .ui.compact.selection.dropdown {
   background-color: #ffffff;
-  border-color: #707070;
   color: #000000;
 }
 
@@ -33,9 +32,25 @@ div.search-results div.row div#content div.navbar {
   line-height: 1rem;
 }
 
+.view-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .view-options {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
+}
+.search-results .collection-filters div.form-group label {
+  margin-right: 5px;
+  display: inline;
+}
+
+.search-results .collection-filters div.form-group div.ui.selection.dropdown {
+  width: 100%;
 }
 
 .search-results-section {
@@ -211,9 +226,7 @@ div.masonry div.card {
 }
 
 .facet-button-navbar {
-  flex: 1 1 auto;
   text-align: right;
-  display: block;
 }
 
 .facet-button-navbar button {
@@ -309,6 +322,9 @@ div.masonry div.card {
 }
 
 @media (min-width: 992px) {
+  .search-results .collection-filters div.form-group div.ui.selection.dropdown {
+    width: fit-content;
+  }
   .view-options {
     width: fit-content;
   }
@@ -317,5 +333,11 @@ div.masonry div.card {
   }
   .facet-button-navbar {
     display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .view-info {
+    width: fit-content;
   }
 }
