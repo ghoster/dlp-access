@@ -15,7 +15,7 @@ describe('Search by title by clicking search button', () => {
   it('returns resulting objects with the title searched', () => {
     cy.url()
       .should('eq', 'http://localhost:3000/search?field=title&q=Additions&view=Gallery');
-    cy.get('#content > div.navbar > div.navbar-text > div.pagination-section > div.pagination-text')
+    cy.get('#content > div.navbar > div.view-info > div.pagination-section > div.pagination-text')
       .invoke('text')
       .should('equal', 'Search Results: 1 - 5 of 5');
     
@@ -40,7 +40,7 @@ describe('Search by description by hitting enter key', () => {
   it('returns resulting objects with description searched', () => {
     cy.url()
       .should('eq', 'http://localhost:3000/search?field=description&q=certificate&view=Gallery');
-    cy.get('#content > div.navbar > div.navbar-text > div.pagination-section > div.pagination-text')
+    cy.get('#content > div.navbar > div.view-info > div.pagination-section > div.pagination-text')
       .invoke('text')
       .should('equal', 'Search Results: 1 - 3 of 3');
 
@@ -68,7 +68,7 @@ describe('Search by all fields by hitting enter key', () => {
   it('returns resulting objects with full text search', () => {
     cy.url()
       .should('eq', 'http://localhost:3000/search?field=all&q=Diazotypes%20%28copies%29&view=Gallery');
-    cy.get('#content > div.navbar > div.navbar-text > div.pagination-section > div.pagination-text')
+    cy.get('#content > div.navbar > div.view-info > div.pagination-section > div.pagination-text')
       .invoke('text')
       .should('equal', 'Search Results: 1 - 10 of 43');
 

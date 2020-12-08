@@ -6,7 +6,7 @@ import SiteForm from "./SiteForm";
 import SitePagesForm from "./SitePagesForm";
 import ContentUpload from "./ContentUpload";
 import HomepageForm from "./HomepageForm";
-import SearchFacetsForm from "./SearchFacetsForm";
+import SearchPageForm from "./SearchPageForm";
 import BrowseCollectionsForm from "./BrowseCollectionsForm";
 import DisplayedAttributesForm from "./DisplayedAttributesForm";
 import MediaSectionForm from "./MediaSectionForm";
@@ -61,7 +61,7 @@ class SiteAdmin extends Component {
       contentUpload: <ContentUpload />,
       sitePages: <SitePagesForm />,
       homepage: <HomepageForm />,
-      searchFacets: <SearchFacetsForm />,
+      searchPage: <SearchPageForm />,
       browseCollections: <BrowseCollectionsForm />,
       displayedAttributes: <DisplayedAttributesForm />,
       mediaSection: <MediaSectionForm />
@@ -110,12 +110,10 @@ class SiteAdmin extends Component {
               </Link>
             </li>
             <li
-              className={
-                this.state.form === "searchFacets" ? "admin-active" : ""
-              }
+              className={this.state.form === "searchPage" ? "admin-active" : ""}
             >
               <Link
-                onClick={() => this.setForm("searchFacets")}
+                onClick={() => this.setForm("searchPage")}
                 to={"/siteAdmin"}
               >
                 Search Page Config

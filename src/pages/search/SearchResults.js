@@ -204,7 +204,7 @@ class SearchResults extends Component {
                     aria-roledescription="Sort options"
                   >
                     <SortbyDropdown
-                      siteSort={this.props.browseItems.sort}
+                      siteSort={this.props.searchSorts}
                       updateFormState={this.props.updateFormState}
                     />
                   </div>

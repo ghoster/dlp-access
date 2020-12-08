@@ -50,7 +50,6 @@ class SearchLoader extends Component {
     let field = name === "field" ? val : this.state.field;
     let view = name === "view" ? val : this.state.view;
     let filters = name === "filters" ? val : this.state.filters;
-
     const searchParams = new URLSearchParams();
     const searchQuery = {
       q: q,
@@ -146,7 +145,9 @@ class SearchLoader extends Component {
   }
 
   async loadItems() {
-    const { q, field, view, ...filters } = this.getParams(this.props.location);
+    const { q, field, view, sort, ...filters } = this.getParams(
+      this.props.location
+    );
     let searchInput = {};
     if (field && q) {
       searchInput = { [field]: q };

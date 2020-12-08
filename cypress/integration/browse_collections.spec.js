@@ -31,7 +31,7 @@ describe('Browse collections page', () => {
   
   it('renders the all the collections if increasing the number of results to be showed', () => {
     cy.get('#content-wrapper')
-      .find('div.collection-view-options > :nth-child(2) > div.selection')
+      .find('div.collection-view-options > :nth-child(2)')
       .click()
       .contains('50')
       .click();

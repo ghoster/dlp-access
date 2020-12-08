@@ -51,7 +51,7 @@ describe("Displays and updates search page configurations", () => {
         .first()
         .clear()
         .type("Object Type");
-      cy.contains("Update Search Facets").click();
+      cy.contains("Update Facet and Sort Fields").click();
       cy.contains("Label: Object Type", { timeout: 2000 }).should("be.visible");
     })
 
@@ -63,7 +63,7 @@ describe("Displays and updates search page configurations", () => {
         .first()
         .clear()
         .type("Category");
-      cy.contains("Update Search Facets").click();
+      cy.contains("Update Facet and Sort Fields").click();
       cy.contains("Label: Category", { timeout: 2000 }).should("be.visible");
     });
   });
@@ -75,7 +75,7 @@ describe("Displays and updates search page configurations", () => {
         .first()
         .clear()
         .type("Creator Updated");
-      cy.contains("Update Search Facets").click();
+      cy.contains("Update Facet and Sort Fields").click();
       cy.contains("Creator Updated", { timeout: 2000 }).should("be.visible");
     })
 
@@ -88,7 +88,7 @@ describe("Displays and updates search page configurations", () => {
         .first()
         .clear()
         .type("Demo");
-      cy.contains("Update Search Facets").click();
+      cy.contains("Update Facet and Sort Fields").click();
       cy.contains("Demo", { timeout: 2000 }).should("be.visible");
     });
   });
@@ -103,7 +103,7 @@ describe("Displays and updates search page configurations", () => {
         .first()
         .clear()
         .type("Creator 10");
-      cy.contains("Update Search Facets").click();
+      cy.contains("Update Facet and Sort Fields").click();
       cy.contains("Creator 10", { timeout: 2000 }).should("be.visible");
     })
 
@@ -114,7 +114,7 @@ describe("Displays and updates search page configurations", () => {
       cy.get("#content-wrapper > div > div > div > form > section:nth-child(2) > fieldset > ul > li:nth-child(11)", { timeout: 2000 })
         .contains("X")
         .click();
-      cy.contains("Update Search Facets").click();
+      cy.contains("Update Facet and Sort Fields").click();
       cy.contains("Creator 10", { timeout: 2000 }).should("not.be.visible");
     });
   });
@@ -123,7 +123,7 @@ describe("Displays and updates search page configurations", () => {
     const input = "Alberta Pfeiffer Architectural Collection, 1929-1976 (Ms1988-017)";
     it("Adds a new search facet field", () => {
       cy.get("input[value='edit']").parent().click();
-      cy.get("select", { timeout: 2000 }).select("collection");
+      cy.get("select").eq(0).select("collection");
       cy.contains("Add New Search Facet").click();
       cy.get("input[name='collection_label']", { timeout: 2000 })
         .first()
@@ -136,7 +136,7 @@ describe("Displays and updates search page configurations", () => {
         .first()
         .clear()
         .type(input);
-      cy.contains("Update Search Facets").click();
+      cy.contains("Update Facet and Sort Fields").click();
       cy.contains("Facet Field: collection", { timeout: 2000 }).should("be.visible");
       cy.contains("Label: Collection Type").should("be.visible");
       cy.contains(input).should("be.visible");
@@ -149,10 +149,32 @@ describe("Displays and updates search page configurations", () => {
       cy.get("#content-wrapper > div > div > div > form > section:nth-child(2)", { timeout: 2000 })
         .contains("Delete Facet Field")
         .click();
-      cy.contains("Update Search Facets", { timeout: 2000 }).click();
+      cy.contains("Update Facet and Sort Fields", { timeout: 2000 }).click();
       cy.contains("Facet Field: collection", { timeout: 2000 }).should("not.be.visible");
       cy.contains("Label: Collection Type").should("not.be.visible");
       cy.contains(input).should("not.be.visible");
+    });
+  });
+
+  describe("Adds a new sort field and removes it", () => {
+    it("Adds a new sort field", () => {
+      cy.get("input[value='edit']").parent().click();
+      cy.get("select").eq(1).select("identifier (asc)");
+      cy.contains("Add New Sort Field").click();
+      cy.contains("Update Facet and Sort Fields").click();
+      cy.wait(1000);
+      cy.contains("Sort Field: identifier").should("be.visible");
+    })
+
+    it("Removes the newly added sort field", () => {
+      cy.get("input[value='edit']").parent().click();
+      cy.get("#content-wrapper > div > div > div > form > ul > section:nth-child(4)")
+        .contains("Delete Sort Field")
+        .click();
+      cy.wait(1000);
+      cy.contains("Update Facet and Sort Fields").click();
+      cy.wait(1000);
+      cy.contains("Sort Field: identifier").should("not.be.visible");
     });
   });
 
