@@ -199,7 +199,10 @@ const RenderAttrDetailed = ({ item, attribute, languages, type }) => {
       ) {
         return item_value.map((i_value, idx) => {
           return (
-            <tr key={`${item_label}_${idx}`}>
+            <tr
+              key={`${item_label}_${idx}`}
+              className={item_label[idx].toLowerCase().replace(" ", "_")}
+            >
               <th className="collection-detail-key" scope="row">
                 {item_label[idx]}
               </th>
@@ -211,7 +214,10 @@ const RenderAttrDetailed = ({ item, attribute, languages, type }) => {
         });
       } else {
         return (
-          <tr key={item_label}>
+          <tr
+            key={item_label}
+            className={item_label.toLowerCase().replace(" ", "_")}
+          >
             <th className="collection-detail-key" scope="row">
               {item_label}
             </th>
@@ -223,7 +229,11 @@ const RenderAttrDetailed = ({ item, attribute, languages, type }) => {
       }
     } else if (type === "grid") {
       return (
-        <div className="collection-detail-entry">
+        <div
+          className={`collection-detail-entry ${item_label
+            .toLowerCase()
+            .replace(" ", "_")}`}
+        >
           <div className="collection-detail-key">{item_label}</div>
           <div className={`collection-detail-value ${value_style}`}>
             {textFormat(item, attribute.field, languages)}
