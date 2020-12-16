@@ -42,7 +42,8 @@
     "semantic-ui-react": "^0.88.2",
     "slick-carousel": "^1.8.1",
     "typescript": "^3.7.4",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "x3dom": "^1.8.1"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [

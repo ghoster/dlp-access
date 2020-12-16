@@ -72,10 +72,19 @@ describe('Archive Mirador viewer', () => {
   });
 });
 
-describe('Archive 3d viewer', () => {
-  it('renders 3d viewer for 3d records', () => {
+describe('Archive 3d .obj viewer', () => {
+  it('renders 3d viewer for 3d .obj records', () => {
     cy.visit('http://localhost:3000/archive/cz94zm9p');
     cy.get('div.obj-wrapper canvas')
+      .eq(0)
+      .should('be.visible');
+  });
+});
+
+describe('Archive 3d .x3d viewer', () => {
+  it('renders 3d viewer for 3d .x3d records', () => {
+    cy.visit('http://localhost:3000/archive/h387pp1c');
+    cy.get('div.obj-wrapper x3d#x3dElement canvas')
       .eq(0)
       .should('be.visible');
   });

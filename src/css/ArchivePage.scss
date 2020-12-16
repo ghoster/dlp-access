@@ -90,7 +90,10 @@ div.obj-wrapper {
   position: relative;
   display: block;
   margin: 0 auto;
-  max-width: 50%;
+  section {
+    padding: 0;
+    border: none;
+  }
 }
 
 @media (min-width: 576px) {
