@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Thumbnail from "../../components/Thumbnail";
 import { arkLinkFormatted } from "../../lib/MetadataRenderer";
 
-import "../../css/CollectionsShowPage.css";
+import "../../css/CollectionsShowPage.scss";
 
 class CollectionItemsList extends Component {
   render() {

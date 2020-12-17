@@ -16,7 +16,7 @@ import SearchLoader from "./pages/search/SearchLoader";
 import ArchivePage from "./pages/archives/ArchivePage";
 import { getSite } from "./lib/fetchTools";
 
-import "./App.css";
+import "./App.scss";
 
 class App extends Component {
   constructor(props) {

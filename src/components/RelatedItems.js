@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import "../css/RelatedItems.css";
+import "../css/RelatedItems.scss";
 
 class RelatedItems extends Component {
   constructor(props) {

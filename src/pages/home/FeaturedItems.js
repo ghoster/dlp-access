@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FeaturedItem from "./FeaturedItem";
 
-import "../../css/FeaturedItems.css";
+import "../../css/FeaturedItems.scss";
 
 class FeaturedItems extends Component {
   constructor() {

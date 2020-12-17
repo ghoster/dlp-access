@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "../css/Thumbnail.css";
+import "../css/Thumbnail.scss";
 
 class Thumbnail extends Component {
   labelDisplay() {

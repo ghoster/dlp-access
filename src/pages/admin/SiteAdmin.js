@@ -11,7 +11,7 @@ import BrowseCollectionsForm from "./BrowseCollectionsForm";
 import DisplayedAttributesForm from "./DisplayedAttributesForm";
 import MediaSectionForm from "./MediaSectionForm";
 
-import "../../css/SiteAdmin.css";
+import "../../css/SiteAdmin.scss";
 
 class SiteAdmin extends Component {
   constructor(props) {

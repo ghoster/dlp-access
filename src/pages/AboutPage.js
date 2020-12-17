@@ -3,7 +3,7 @@ import SiteTitle from "../components/SiteTitle";
 import ContactSection from "../components/ContactSection";
 import { getFile } from "../lib/fetchTools";
 
-import "../css/AboutPage.css";
+import "../css/AboutPage.scss";
 
 class AboutPage extends Component {
   constructor(props) {

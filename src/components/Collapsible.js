@@ -7,7 +7,7 @@ import {
 import { labelAttr } from "../lib/MetadataRenderer";
 import Checkbox from "./Checkbox";
 
-import "../css/collapsible.css";
+import "../css/collapsible.scss";
 
 class Collapsible extends Component {
   constructor(props) {

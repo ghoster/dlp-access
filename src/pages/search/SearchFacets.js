@@ -5,8 +5,8 @@ import { NavLink } from "react-router-dom";
 import qs from "query-string";
 import FocusLock from "react-focus-lock";
 
-import "../../css/ListPages.css";
-import "../../css/SearchResult.css";
+import "../../css/ListPages.scss";
+import "../../css/SearchResult.scss";
 
 class SearchFacets extends Component {
   constructor(props) {

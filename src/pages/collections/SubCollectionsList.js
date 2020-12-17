@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 
-import "../../css/CollectionsShowPage.css";
+import "../../css/CollectionsShowPage.scss";
 import { arkLinkFormatted } from "../../lib/MetadataRenderer";
 
 class SubCollectionsList extends Component {

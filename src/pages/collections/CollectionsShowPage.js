@@ -15,7 +15,7 @@ import {
   getTopLevelParentForCollection
 } from "../../lib/fetchTools";
 
-import "../../css/CollectionsShowPage.css";
+import "../../css/CollectionsShowPage.scss";
 
 const TRUNCATION_LENGTH = 600;
 

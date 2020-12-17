@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import qs from "query-string";
 import { labelAttr } from "../lib/MetadataRenderer";
 
-import "../css/searchBar.css";
+import "../css/searchBar.scss";
 
 class SearchBar extends Component {
   state = {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { arkLinkFormatted } from "../../lib/MetadataRenderer";
 import Thumbnail from "../../components/Thumbnail";
-import "../../css/SearchResult.css";
+import "../../css/SearchResult.scss";
 
 class MasonryView extends Component {
   render() {

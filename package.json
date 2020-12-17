@@ -23,6 +23,7 @@
     "mediaelement": "^4.2.16",
     "mocha": "^8.1.0",
     "mochawesome": "^4.1.0",
+    "node-sass": "^4.14.1",
     "patch-package": "^6.2.2",
     "pdfjs-dist": "^2.4.456",
     "query-string": "^6.9.0",

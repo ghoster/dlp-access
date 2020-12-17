@@ -1,6 +1,6 @@
 import React from "react";
 import qs from "query-string";
-import "../css/ListPages.css";
+import "../css/ListPages.scss";
 import ReactHtmlParser from "react-html-parser";
 
 export function labelAttr(attr, filter, languages) {

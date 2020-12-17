@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "../../css/MultimediaSection.css";
+import "../../css/MultimediaSection.scss";
 
 class MultimediaSection extends Component {
   render() {

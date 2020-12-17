@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../css/Viewer.css";
+import "../css/Viewer.scss";
 
 class AudioPlayer extends Component {
   render() {

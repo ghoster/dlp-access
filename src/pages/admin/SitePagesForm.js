@@ -7,7 +7,7 @@ import { API, Auth } from "aws-amplify";
 import { getSite } from "../../lib/fetchTools";
 import * as mutations from "../../graphql/mutations";
 
-import "../../css/adminForms.css";
+import "../../css/adminForms.scss";
 
 const initialFormState = [];
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { addNewlineInDesc } from "../lib/MetadataRenderer";
 
-import "../css/CollectionsShowPage.css";
+import "../css/CollectionsShowPage.scss";
 
 class CollectionTopContent extends Component {
   constructor(props) {

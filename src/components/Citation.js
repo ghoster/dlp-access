@@ -3,7 +3,7 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 import { htmlParsedValue } from "../lib/MetadataRenderer";
 
-import "../css/Citation.css";
+import "../css/Citation.scss";
 
 class Citation extends Component {
   render() {

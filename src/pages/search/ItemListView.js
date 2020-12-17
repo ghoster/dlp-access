@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { RenderItems, arkLinkFormatted } from "../../lib/MetadataRenderer";
 import Thumbnail from "../../components/Thumbnail";
-import "../../css/SearchResult.css";
+import "../../css/SearchResult.scss";
 import { fetchLanguages } from "../../lib/fetchTools";
 
 class ItemListView extends Component {

@@ -11,8 +11,8 @@ import { fetchLanguages } from "../../lib/fetchTools";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { labelAttr } from "../../lib/MetadataRenderer";
-import "../../css/ListPages.css";
-import "../../css/SearchResult.css";
+import "../../css/ListPages.scss";
+import "../../css/SearchResult.scss";
 
 class SearchResults extends Component {
   constructor(props) {

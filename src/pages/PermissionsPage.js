@@ -3,7 +3,7 @@ import SiteTitle from "../components/SiteTitle";
 import ContactSection from "../components/ContactSection";
 import { getFile } from "../lib/fetchTools";
 
-import "../css/TermsPage.css";
+import "../css/TermsPage.scss";
 class PermissionsPage extends Component {
   constructor(props) {
     super(props);

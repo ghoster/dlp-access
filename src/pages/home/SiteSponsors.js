@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getImgUrl } from "../../lib/fetchTools";
 
-import "../../css/SiteSponsors.css";
+import "../../css/SiteSponsors.scss";
 
 class SiteSponsors extends Component {
   constructor(props) {

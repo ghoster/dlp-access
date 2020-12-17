@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { getFile } from "../../lib/fetchTools";
-import "../../css/FeaturedStaticImage.css";
+import "../../css/FeaturedStaticImage.scss";
 
 class FeaturedStaticImage extends Component {
   constructor(props) {

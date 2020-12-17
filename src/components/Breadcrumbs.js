@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { arkLinkFormatted } from "../lib/MetadataRenderer";
 import { fetchHeirarchyPathMembers } from "../lib/fetchTools";
 
-import "../css/breadcrumbs.css";
+import "../css/breadcrumbs.scss";
 
 class Breadcrumbs extends Component {
   constructor(props) {

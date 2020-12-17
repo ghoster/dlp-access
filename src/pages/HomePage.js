@@ -8,7 +8,7 @@ import MultimediaSection from "./home/MultimediaSection";
 import SiteSponsors from "./home/SiteSponsors";
 import CollectionHighlights from "./home/CollectionHighlights";
 
-import "../css/HomePage.css";
+import "../css/HomePage.scss";
 
 class HomePage extends Component {
   render() {

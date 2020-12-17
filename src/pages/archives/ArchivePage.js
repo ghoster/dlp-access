@@ -18,7 +18,7 @@ import { searchArchives } from "../../graphql/queries";
 import RelatedItems from "../../components/RelatedItems";
 import Citation from "../../components/Citation";
 
-import "../../css/ArchivePage.css";
+import "../../css/ArchivePage.scss";
 
 class ArchivePage extends Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "semantic-ui-react";
 
-import "../css/ListPages.css";
+import "../css/ListPages.scss";
 
 class Pagination extends Component {
   lowerBound() {

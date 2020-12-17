@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { getImgUrl } from "../../lib/fetchTools";
 
-import "../../css/CollectionHighlights.css";
+import "../../css/CollectionHighlights.scss";
 
 class CollectionHighlights extends Component {
   constructor(props) {

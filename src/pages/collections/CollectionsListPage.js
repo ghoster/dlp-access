@@ -7,8 +7,8 @@ import SortbyDropdown from "../../components/SortbyDropdown";
 import Pagination from "../../components/Pagination";
 import ViewBar from "../../components/ViewBar";
 
-import "../../css/ListPages.css";
-import "../../css/CollectionsListPage.css";
+import "../../css/ListPages.scss";
+import "../../css/CollectionsListPage.scss";
 
 class CollectionsListPage extends Component {
   render() {
