@@ -43,8 +43,11 @@ div.view-section ul li {
 div.view-section ul li span.entry {
   margin-right: 15px;
 }
-.key {
+.view-section .key {
   font-weight: bold;
+}
+.view-section .value {
+  text-transform: capitalize;
 }
 input.showTitleCheckbox {
   margin: 4px 0 0 5px;
