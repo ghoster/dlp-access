@@ -133,6 +133,7 @@ class SitePagesForm extends Component {
 
     const userInfo = await Auth.currentUserPoolUser();
     let historyInfo = {
+      groups: userInfo.signInUserSession.accessToken.payload["cognito:groups"],
       userEmail: userInfo.attributes.email,
       siteID: siteID,
       event: JSON.stringify(eventInfo)

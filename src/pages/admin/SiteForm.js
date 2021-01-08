@@ -94,7 +94,9 @@ class SiteForm extends Component {
       };
     }, {});
     const userInfo = await Auth.currentUserPoolUser();
+    console.log("userInfo", userInfo);
     let historyInfo = {
+      groups: userInfo.signInUserSession.accessToken.payload["cognito:groups"],
       userEmail: userInfo.attributes.email,
       siteID: siteID,
       event: JSON.stringify(eventInfo)

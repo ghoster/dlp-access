@@ -50,6 +50,8 @@ class FileUploadField extends Component {
       });
       const userInfo = await Auth.currentUserPoolUser();
       let historyInfo = {
+        groups:
+          userInfo.signInUserSession.accessToken.payload["cognito:groups"],
         userEmail: userInfo.attributes.email,
         siteID: this.props.site.id,
         event: JSON.stringify(eventInfo)

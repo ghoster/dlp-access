@@ -130,6 +130,7 @@ class DisplayedAttributesForm extends Component {
     }, {});
 
     let historyInfo = {
+      groups: userInfo.signInUserSession.accessToken.payload["cognito:groups"],
       userEmail: userInfo.attributes.email,
       siteID: siteID,
       event: JSON.stringify(eventInfo)

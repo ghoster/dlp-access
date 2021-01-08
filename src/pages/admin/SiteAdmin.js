@@ -27,7 +27,16 @@ class SiteAdmin extends Component {
       const data = await Auth.currentUserPoolUser();
       const groups =
         data.signInUserSession.accessToken.payload["cognito:groups"];
-      if (groups.indexOf("SiteAdmin") !== -1) {
+      let adminGroup = "";
+      const repo_type = process.env.REACT_APP_REP_TYPE.toLowerCase();
+      if (repo_type === "default") {
+        adminGroup = "demoSiteAdmin";
+      } else if (repo_type === "podcasts") {
+        adminGroup = "podcastSiteAdmin";
+      } else {
+        adminGroup = `${repo_type}SiteAdmin`;
+      }
+      if (groups && groups.indexOf(adminGroup) !== -1) {
         this.setAuthorized(true);
       } else {
         this.setAuthorized(false);
