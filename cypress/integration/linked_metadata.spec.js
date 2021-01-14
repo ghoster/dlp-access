@@ -1,11 +1,20 @@
 describe('Archive metadata', () => {
   it('lands on search facet by the metadata field', () => {
-    cy.visit('/archive/hs59hv2z');
+    cy.visit('/archive/cv65x38f');
     cy.get('[data-cy=multi-field-span] a')
       .eq(2)
       .click();
     cy.url({ timeout: 2000 })
-      .should('eq', 'http://localhost:3000/search/?category=archive&creator=Chadeayne%2C%20Olive%2C%201904-2001&field=title&q=&view=Gallery');
+      .should('eq', 'http://localhost:3000/search/?category=archive&creator=Green%2C%20Terence%20M.%20&field=title&q=&view=Gallery');
+  });
+
+  it('first entry in "Is Part of" directs to the top level collection show page', () => {
+    cy.visit('/archive/cv65x38f');
+    cy.get('[data-cy=multi-field-span] a')
+      .eq(0)
+      .click();
+    cy.url({ timeout: 2000 })
+      .should('eq', 'http://localhost:3000/collection/4g825g7ddemo');
   });
 });
 

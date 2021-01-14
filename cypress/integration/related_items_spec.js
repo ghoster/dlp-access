@@ -6,7 +6,7 @@ describe("Related items on archives page", () => {
     })
 
     it("Carousel populates when more than ten items in the item's subcollection", () => {
-        cy.visit("http://localhost:3000/archive/4121w776", { timeout: 2000 });
+        cy.visit("http://localhost:3000/archive/pf59ds4d", { timeout: 2000 });
         cy.get(".slick-slide").should("have.class", "slick-active");
     })
 
@@ -21,7 +21,7 @@ describe("Related items on archives page", () => {
     })
 
     it("Carousel populates when less than 10 items in the entire collection", () => {
-        cy.visit("http://localhost:3000/archive/0863k84a", { timeout: 2000 });
+        cy.visit("http://localhost:3000/archive/m58xyh90", { timeout: 2000 });
         cy.get(".slick-slide").should("have.class", "slick-active");
     });
 

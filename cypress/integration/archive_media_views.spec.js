@@ -61,7 +61,7 @@ describe('Archive pdf embed', () => {
 
 describe('Archive Mirador viewer', () => {
   it('renders viewer if manifest.json', () => {
-    cy.visit('/archive/5v709r98');
+    cy.visit('/archive/cv65x38f');
     cy.get('div#mirador_viewer > div > main')
       .eq(0)
       .should('have.class', 'mirador-viewer')

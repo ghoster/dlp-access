@@ -110,7 +110,7 @@ function listValue(category, attr, value, languages) {
   }
 }
 
-function textFormat(item, attr, languages) {
+function textFormat(item, attr, languages, collectionCustomKey) {
   if (attr === "display_date" && item[attr] === null) attr = "start_date";
   if (item[attr] === null) return null;
   let category = "archive";
@@ -120,7 +120,13 @@ function textFormat(item, attr, languages) {
       <div>
         {item[attr].map((value, i) => (
           <span className="list-unstyled" key={i} data-cy="multi-field-span">
-            {listValue(category, attr, value, languages)}
+            {attr === "belongs_to" && i === 0 ? (
+              <a href={`/collection/${arkLinkFormatted(collectionCustomKey)}`}>
+                {value}
+              </a>
+            ) : (
+              listValue(category, attr, value, languages)
+            )}
           </span>
         ))}
       </div>
@@ -188,10 +194,16 @@ const RenderAttribute = ({ item, attribute, languages }) => {
   }
 };
 
-const RenderAttrDetailed = ({ item, attribute, languages, type }) => {
+const RenderAttrDetailed = ({
+  item,
+  attribute,
+  languages,
+  collectionCustomKey,
+  type
+}) => {
   const item_value = item[attribute.field];
   const item_label = attribute.label;
-  if (textFormat(item, attribute.field, languages)) {
+  if (textFormat(item, attribute.field, languages, collectionCustomKey)) {
     let value_style = attribute.field === "identifier" ? "identifier" : "";
     if (type === "table") {
       if (
@@ -224,7 +236,12 @@ const RenderAttrDetailed = ({ item, attribute, languages, type }) => {
               {item_label}
             </th>
             <td className={`collection-detail-value ${value_style}`}>
-              {textFormat(item, attribute.field, languages)}
+              {textFormat(
+                item,
+                attribute.field,
+                languages,
+                collectionCustomKey
+              )}
             </td>
           </tr>
         );
@@ -238,7 +255,7 @@ const RenderAttrDetailed = ({ item, attribute, languages, type }) => {
         >
           <div className="collection-detail-key">{item_label}</div>
           <div className={`collection-detail-value ${value_style}`}>
-            {textFormat(item, attribute.field, languages)}
+            {textFormat(item, attribute.field, languages, collectionCustomKey)}
           </div>
         </div>
       );
@@ -266,6 +283,7 @@ export const RenderItemsDetailed = ({
   keyArray,
   item,
   languages,
+  collectionCustomKey,
   type = "table"
 }) => {
   let render_items_detailed = [];
@@ -276,6 +294,7 @@ export const RenderItemsDetailed = ({
         attribute={value}
         key={index}
         languages={languages}
+        collectionCustomKey={collectionCustomKey}
         type={type}
       />
     );

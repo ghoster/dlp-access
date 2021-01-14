@@ -24,6 +24,7 @@ class CollectionsShowPage extends Component {
     super(props);
     this.state = {
       collection: null,
+      collectionCustomKey: "",
       languages: null,
       descriptionTruncated: true,
       subDescriptionTruncated: true,
@@ -42,6 +43,8 @@ class CollectionsShowPage extends Component {
       order: "ASC",
       limit: 1,
       filter: {
+        collection_category: { eq: process.env.REACT_APP_REP_TYPE },
+        visibility: { eq: true },
         custom_key: {
           eq: `ark:/53696/${customKey}`
         }
@@ -50,23 +53,27 @@ class CollectionsShowPage extends Component {
     const response = await API.graphql(
       graphqlOperation(searchCollections, options)
     );
-    let collection = null;
     try {
-      collection = response.data.searchCollections.items[0];
+      const collection = response.data.searchCollections.items[0];
+      const topLevelParentCollection = await getTopLevelParentForCollection(
+        collection
+      );
+      const collectionCustomKey = topLevelParentCollection.custom_key;
+      this.setState(
+        { collection: collection, collectionCustomKey: collectionCustomKey },
+        function() {
+          const topLevelAttributes = [
+            "title",
+            "description",
+            "thumbnail_path",
+            "creator",
+            "modified_date"
+          ];
+          this.setTopLevelAttributes(topLevelAttributes);
+        }
+      );
     } catch (error) {
       console.error(`Error fetching collection: ${customKey}`);
-    }
-    if (collection) {
-      this.setState({ collection: collection }, function() {
-        const topLevelAttributes = [
-          "title",
-          "description",
-          "thumbnail_path",
-          "creator",
-          "modified_date"
-        ];
-        this.setTopLevelAttributes(topLevelAttributes);
-      });
     }
   }
 
@@ -272,6 +279,7 @@ class CollectionsShowPage extends Component {
                         }
                         item={this.state.collection}
                         languages={this.state.languages}
+                        collectionCustomKey={this.state.collectionCustomKey}
                         type="table"
                       />
                     </tbody>
