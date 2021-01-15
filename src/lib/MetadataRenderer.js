@@ -41,6 +41,7 @@ export function titleFormatted(item, category) {
   );
 }
 export function dateFormatted(item) {
+  if (item.display_date) return item.display_date;
   let circa_date = item.circa ? item.circa : "";
   let end_date = item.end_date ? " - " + yearmonthDate(item.end_date) : "";
   let start_date = item.start_date ? yearmonthDate(item.start_date) : "";
@@ -110,6 +111,7 @@ function listValue(category, attr, value, languages) {
 }
 
 function textFormat(item, attr, languages) {
+  if (attr === "display_date" && item[attr] === null) attr = "start_date";
   if (item[attr] === null) return null;
   let category = "archive";
   if (item.collection_category) category = "collection";
@@ -137,7 +139,7 @@ function textFormat(item, attr, languages) {
     );
   } else if (attr === "description") {
     return <MoreLink category={category} item={item} />;
-  } else if (attr === "start_date") {
+  } else if (attr === "display_date" || attr === "start_date") {
     return dateFormatted(item);
   } else if (attr === "size") {
     if (category === "collection") return collectionSizeText(item);
