@@ -11,57 +11,90 @@ class Header extends Component {
   }
   render() {
     return (
-      <div className="vt-home">
-        <div className="header">
+      <div id="vt_theme_one" className="vt-home norightcol home-page">
+        <header className="header">
+          <nav aria-label="Skip Links">
+            <ul className="vt-skip-nav">
+              <li className="vt-skip-navItem">
+                <a className="vt-skip-navLink" href="#vt_main">
+                  Skip to main content
+                </a>
+              </li>
+            </ul>
+          </nav>
+
           <div className="row vt-one-headerRow">
-            <header className="col header-col" role="banner">
-              <a
-                className="sr-only sr-only-focusable skipLink"
-                href="#content-wrapper"
-              >
-                Skip to main content
-              </a>
-              <div id="vt_logo">
-                <a className="vt-logo-link" href="https://lib.vt.edu">
+            <div className="col header-col">
+              <div id="vt_logo" className="vt-logo">
+                <a href="https://www.lib.vt.edu/" className="vt-logo-link">
                   <img
-                    alt="University Libraries at Virginia Tech"
-                    src="/images/library-logo-lockup_color.png"
-                    style={{ width: "220px" }}
+                    alt=""
+                    className="vt-logo-image"
+                    src="https://www.assets.cms.vt.edu/images/maroonVTonWhite.svg"
+                    focusable="false"
+                    aria-hidden="true"
                   />
+
+                  <span
+                    className="vt-logo-divider"
+                    focusable="false"
+                    aria-hidden="true"
+                  ></span>
+                  <span className="vt-logo-text">University Libraries</span>
                 </a>
               </div>
               {/*
-              <!-- ///////////////////////////////////////////// -->
-              <!-- MAIN NAVIGATION -->
-              <!-- ///////////////////////////////////////////// -->
-            */}
+                <!-- ///////////////////////////////////////////// -->
+                <!-- MAIN NAVIGATION -->
+                <!-- ///////////////////////////////////////////// -->
+              */}
               <nav className="col" id="vt_nav" aria-label="Site Menu">
                 <div className="linkWrapper">
                   <button
                     className="vt-nav-toggle"
-                    aria-controls="vt_main_nav"
+                    aria-controls="vt_offcanvas_nav"
                     aria-expanded="false"
                     onClick={this.onNavClick}
-                    aria-haspopup="menu"
                   >
                     <span className="vt-nav-toggleLabel">Menu</span>
-                    <span
-                      className="far fa-bars menu-open"
+                    <svg
+                      className="svg-inline--fa fa-bars fa-w-14 menu-open"
                       aria-hidden="true"
                       focusable="false"
-                      role="img"
-                    ></span>
-                    <span
-                      className="far fa-times menu-close d-none"
+                      role="presentation"
+                      data-prefix="far"
+                      data-icon="bars"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 448 512"
+                      data-fa-i2svg=""
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"
+                      ></path>
+                    </svg>
+                    {/* <span className="far fa-bars menu-open" aria-hidden="true" focusable="false" role="presentation"></span>*/}
+                    <svg
+                      className="svg-inline--fa fa-times fa-w-10 menu-close d-none"
                       aria-hidden="true"
                       focusable="false"
-                      role="img"
-                    ></span>
+                      role="presentation"
+                      data-prefix="far"
+                      data-icon="times"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 320 512"
+                      data-fa-i2svg=""
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M207.6 256l107.72-107.72c6.23-6.23 6.23-16.34 0-22.58l-25.03-25.03c-6.23-6.23-16.34-6.23-22.58 0L160 208.4 52.28 100.68c-6.23-6.23-16.34-6.23-22.58 0L4.68 125.7c-6.23 6.23-6.23 16.34 0 22.58L112.4 256 4.68 363.72c-6.23 6.23-6.23 16.34 0 22.58l25.03 25.03c6.23 6.23 16.34 6.23 22.58 0L160 303.6l107.72 107.72c6.23 6.23 16.34 6.23 22.58 0l25.03-25.03c6.23-6.23 6.23-16.34 0-22.58L207.6 256z"
+                      ></path>
+                    </svg>
+                    {/* <span className="far fa-times menu-close d-none" aria-hidden="true" focusable="false" role="presentation"></span> */}
                   </button>
                 </div>
                 <div
                   id="vt_offcanvas_nav"
-                  role="group"
                   aria-label="Main Menu Drawer"
                   aria-hidden="true"
                   tabIndex="-1"
@@ -74,40 +107,40 @@ class Header extends Component {
                     <li className="vt-currentSiteTitle">
                       <a
                         className="vt-currentSiteTitle-link"
-                        href="https://vt.edu"
+                        href="https://www.lib.vt.edu/"
                         tabIndex="-1"
                       >
-                        Virginia Tech
+                        University Libraries
                       </a>
                     </li>
                   </ol>
 
                   <SiteNavigationLinks site={this.props.site} />
                 </div>
-              </nav>{" "}
-              {/* !-- end vt_nav --> */}
-              {/*
+              </nav>
+            </div>
+          </div>
+          {/* !-- end vt_nav --> */}
+          {/*
                     <!-- ///////////////////////////////////////////// -->
                     <!-- END MAIN NAVIGATION -->
                     <!-- ///////////////////////////////////////////// -->
                   */}
-            </header>
-          </div>{" "}
-          {/* <!-- end vt-one-headerRow --> */}
-          {/*
+        </header>
+        {/* <!-- end vt-one-headerRow --> */}
+        {/*
           <!-- ///////////////////////////////////////////// -->
           <!-- END HEADER -->
           <!-- ///////////////////////////////////////////// -->
         */}
-          <nav aria-label="Site breadcrumbs" className="vt-page-path row">
-            <div className="gateway">
-              <HeaderBreadcrumbs
-                site={this.props.site}
-                location={this.props.location}
-              />
-            </div>
-          </nav>
-        </div>
+        <nav aria-label="Page Context" className="vt-page-path row">
+          <div className="gateway">
+            <HeaderBreadcrumbs
+              site={this.props.site}
+              location={this.props.location}
+            />
+          </div>
+        </nav>
       </div>
     );
   }
