@@ -20,7 +20,8 @@ describe('Selecting English loads English results', () => {
     cy.get('div.gallery-item').first()
       .find('a')
       .click();
-    cy.url({ timeout: 2000 }).should("include", "/archive/");
+    cy.url().should("include", "/archive/");
+    cy.wait(2000);
     cy.get('div.details-section-metadata > table[aria-label="Item Metadata"] tbody')
       .find('tr.language td a')
       .invoke('text')
