@@ -24,57 +24,52 @@ class MiradorForm extends Component {
     if (site) {
       if (site.miradorOptions) {
         const mirador = JSON.parse(site.miradorOptions);
-        let siteInfo = {};
-        try {
-          siteInfo = {
-            selectedTheme: mirador.selectedTheme || "light",
-            language: "en",
-            id: "mirador_viewer",
-            window: {
-              allowClose: false,
-              allowFullscreen: true,
-              allowMaximize: false,
-              allowTopMenuButton: mirador.window.allowTopMenuButton || true,
-              allowWindowSideBar: mirador.window.allowWindowSideBar || true,
-              sideBarPanel: mirador.window.sideBarPanel || "info",
-              defaultView: "single",
-              sideBarOpen: mirador.window.sideBarOpen || false,
-              panels: {
-                info: true,
-                attribution: true,
-                canvas: false,
-                annotations: true,
-                search: false,
-                layers: false
-              }
-            },
-            windows: [
-              {
-                manifestId: ""
-              }
-            ],
-            thumbnailNavigation: {
-              defaultPosition:
-                mirador.thumbnailNavigation.defaultPosition || "far-bottom",
-              displaySettings:
-                mirador.thumbnailNavigation.displaySettings || true,
-              height: mirador.thumbnailNavigation.height || 130,
-              width: mirador.thumbnailNavigation.width || 100
-            },
-            workspace: {
-              draggingEnabled: false,
-              allowNewWindows: false,
-              isWorkspaceAddVisible: false,
-              showZoomControls: true,
-              type: "mosaic"
-            },
-            workspaceControlPanel: {
-              enabled: false
+        let siteInfo = {
+          selectedTheme: mirador.selectedTheme || "light",
+          language: "en",
+          id: "mirador_viewer",
+          window: {
+            allowClose: false,
+            allowFullscreen: true,
+            allowMaximize: false,
+            allowTopMenuButton: mirador.window.allowTopMenuButton || true,
+            allowWindowSideBar: mirador.window.allowWindowSideBar || true,
+            sideBarPanel: mirador.window.sideBarPanel || "info",
+            defaultView: "single",
+            sideBarOpen: mirador.window.sideBarOpen || false,
+            panels: {
+              info: true,
+              attribution: true,
+              canvas: false,
+              annotations: true,
+              search: false,
+              layers: false
             }
-          };
-        } catch (error) {
-          console.error(error);
-        }
+          },
+          windows: [
+            {
+              manifestId: ""
+            }
+          ],
+          thumbnailNavigation: {
+            defaultPosition:
+              mirador.thumbnailNavigation.defaultPosition || "far-bottom",
+            displaySettings:
+              mirador.thumbnailNavigation.displaySettings || true,
+            height: mirador.thumbnailNavigation.height || 130,
+            width: mirador.thumbnailNavigation.width || 100
+          },
+          workspace: {
+            draggingEnabled: false,
+            allowNewWindows: false,
+            isWorkspaceAddVisible: false,
+            showZoomControls: true,
+            type: "mosaic"
+          },
+          workspaceControlPanel: {
+            enabled: false
+          }
+        };
         this.setState({
           formState: siteInfo,
           prevFormState: siteInfo,
@@ -155,36 +150,19 @@ class MiradorForm extends Component {
     });
   };
 
-  updateWindowValue = event => {
+  updateNestedValue = (event, object) => {
     let { name, value } = event.target;
     value = this.stringToBoolean(value);
     if (parseInt(value)) {
       value = parseInt(value);
     }
+    let tempState = { ...this.state.formState };
+    let tempObject = Object.assign({}, tempState[object]);
     this.setState(prevState => {
       return {
         formState: {
           ...prevState.formState,
-          window: { ...prevState.formState.window, [name]: value }
-        }
-      };
-    });
-  };
-
-  updateThumbnailValue = event => {
-    let { name, value } = event.target;
-    value = this.stringToBoolean(value);
-    if (parseInt(value)) {
-      value = parseInt(value);
-    }
-    this.setState(prevState => {
-      return {
-        formState: {
-          ...prevState.formState,
-          thumbnailNavigation: {
-            ...prevState.formState.thumbnailNavigation,
-            [name]: value
-          }
+          [object]: { ...tempObject, [name]: value }
         }
       };
     });
@@ -260,7 +238,9 @@ class MiradorForm extends Component {
                 id="allowTopMenuButton"
                 value={this.state.formState.window.allowTopMenuButton}
                 name="allowTopMenuButton"
-                onChange={this.updateWindowValue}
+                onChange={e => {
+                  this.updateNestedValue(e, "window");
+                }}
               >
                 <option value={true}>Yes</option>
                 <option value={false}>No</option>
@@ -277,7 +257,9 @@ class MiradorForm extends Component {
                 id="allowWindowSideBar"
                 value={this.state.formState.window.allowWindowSideBar}
                 name="allowWindowSideBar"
-                onChange={this.updateWindowValue}
+                onChange={e => {
+                  this.updateNestedValue(e, "window");
+                }}
               >
                 <option value={true}>Yes</option>
                 <option value={false}>No</option>
@@ -293,7 +275,9 @@ class MiradorForm extends Component {
                 id="sideBarPanel"
                 value={this.state.formState.window.sideBarPanel}
                 name="sideBarPanel"
-                onChange={this.updateWindowValue}
+                onChange={e => {
+                  this.updateNestedValue(e, "window");
+                }}
               >
                 <option value="info">Info</option>
                 <option value="attribution">Attribution</option>
@@ -312,7 +296,9 @@ class MiradorForm extends Component {
                 id="sideBarOpen"
                 value={this.state.formState.window.sideBarOpen}
                 name="sideBarOpen"
-                onChange={this.updateWindowValue}
+                onChange={e => {
+                  this.updateNestedValue(e, "window");
+                }}
               >
                 <option value="true">Yes</option>
                 <option value="false">No</option>
@@ -333,7 +319,9 @@ class MiradorForm extends Component {
                     this.state.formState.thumbnailNavigation.defaultPosition
                   }
                   name="defaultPosition"
-                  onChange={this.updateThumbnailValue}
+                  onChange={e => {
+                    this.updateNestedValue(e, "thumbnailNavigation");
+                  }}
                 >
                   <option value="off">Off</option>
                   <option value="far-bottom">Far-bottom</option>
@@ -353,7 +341,9 @@ class MiradorForm extends Component {
                     this.state.formState.thumbnailNavigation.displaySettings
                   }
                   name="displaySettings"
-                  onChange={this.updateThumbnailValue}
+                  onChange={e => {
+                    this.updateNestedValue(e, "thumbnailNavigation");
+                  }}
                 >
                   <option value="true">Yes</option>
                   <option value="false">No</option>
@@ -370,7 +360,9 @@ class MiradorForm extends Component {
                 value={this.state.formState.thumbnailNavigation.height}
                 name="height"
                 placeholder="Enter number of pixels"
-                onChange={this.updateThumbnailValue}
+                onChange={e => {
+                  this.updateNestedValue(e, "thumbnailNavigation");
+                }}
               />
               <Form.Input
                 id="thumbnailWidth"
@@ -379,7 +371,9 @@ class MiradorForm extends Component {
                 value={this.state.formState.thumbnailNavigation.width}
                 name="width"
                 placeholder="Enter number of pixels"
-                onChange={this.updateThumbnailValue}
+                onChange={e => {
+                  this.updateNestedValue(e, "thumbnailNavigation");
+                }}
               />
             </section>
           </section>

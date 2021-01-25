@@ -37,11 +37,11 @@ describe("Updates mirador config fields and reverts", function() {
       done();
       return false;
     });
+    cy.wait(5000);
     cy.get("input[value='edit']")
       .parent()
       .click();
-    cy.get("#selectedTheme")
-      .select("Dark");
+    cy.get("#selectedTheme", { timeout: 5000 }).select("Dark");
     cy.contains("Update Config").click();
     cy.contains("Selected theme: dark", { timeout: 2000 }).should(
       "be.visible");

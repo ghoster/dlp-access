@@ -58,7 +58,7 @@ describe("Update sponsors fields and revert", function () {
             .parent()
             .click();
         const imgPath = "sitecontent/sponsor4.png";
-        cy.get("button[aria-label='Add sponsor']", { timeout: 2000 }).click();
+        cy.get("button[aria-label='Add sponsor']", { timeout: 5000 }).click();
         cy.get(
             "#sponsor3_form > section > div.fileUploadField > input[type=file]", { timeout: 2000 }
         )
