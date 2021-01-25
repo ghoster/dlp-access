@@ -24,7 +24,7 @@ export function getCategory(item) {
 }
 
 export function arkLinkFormatted(customKey) {
-  return customKey.replace("ark:/53696/", "");
+  return customKey.split("/").pop();
 }
 
 export function htmlParsedValue(value) {

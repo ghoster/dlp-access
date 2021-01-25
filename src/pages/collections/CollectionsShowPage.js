@@ -46,7 +46,7 @@ class CollectionsShowPage extends Component {
         collection_category: { eq: process.env.REACT_APP_REP_TYPE },
         visibility: { eq: true },
         custom_key: {
-          eq: `ark:/53696/${customKey}`
+          matchPhrase: customKey
         }
       }
     };

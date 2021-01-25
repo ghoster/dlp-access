@@ -21,7 +21,7 @@ class HeaderBreadcrumbs extends Breadcrumbs {
       limit: 1,
       filter: {
         custom_key: {
-          eq: `ark:/53696/${customKey}`
+          matchPhrase: customKey
         }
       }
     };
