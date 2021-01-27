@@ -78,7 +78,7 @@ describe("Update featured items fields and revert", function () {
         cy.contains("Update Config").click();
         cy.contains("Featured Item 10", { timeout: 2000 }).should("be.visible");
         cy.contains(
-            "Source: https://img.cloud.lib.vt.edu/sites/images/default/featured_item10.png"
+            "Source: featuredItems/featured_item10.png"
         ).should("be.visible");
         cy.contains('Alt text: "La Fragua" Housing, Bogotá').should("be.visible");
         cy.contains(

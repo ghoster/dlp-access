@@ -2,14 +2,6 @@ import React from "react";
 import { Form } from "semantic-ui-react";
 import FileUploadField from "./FileUploadField";
 
-const setImgSrc = (context, srcName, elName) => {
-  let evt = { target: { name: null, value: null, type: "upload" } };
-  evt.target.name = elName;
-  const filePrefix = `https://img.cloud.lib.vt.edu/sites/images/${process.env.REACT_APP_REP_TYPE.toLowerCase()}`;
-  evt.target.value = `${filePrefix}/${srcName}`;
-  context.updateInputValue(evt);
-};
-
 const FeaturedItemsForm = props => {
   const items = props.itemList.map((obj, index) => {
     return (
@@ -17,13 +9,13 @@ const FeaturedItemsForm = props => {
         <legend>Item {index + 1}:</legend>
         <section>
           <FileUploadField
-            context={props.context}
             value={obj.src}
             label="Upload file: (Image file only):"
-            name={`featuredItemImageSrc${index}`}
+            name={`featuredItems_${index}`}
             placeholder="Enter Src"
             site={props.site}
-            setSrc={setImgSrc}
+            filepath="featuredItems"
+            setSrc={props.updateInputValue}
           />
           <label htmlFor={`FI${index}_alt`}>Alt Text</label>
           <input
@@ -31,7 +23,7 @@ const FeaturedItemsForm = props => {
             value={obj.altText}
             name="altText"
             placeholder="Enter the alternative text for the image"
-            onChange={props.updateItemValue}
+            onChange={props.updateItemValue("featuredItems", index)}
             data-index={index}
           />
           <label htmlFor={`FI${index}_title`}>Title</label>
@@ -40,7 +32,7 @@ const FeaturedItemsForm = props => {
             value={obj.cardTitle}
             name="cardTitle"
             placeholder="Enter the title for the item"
-            onChange={props.updateItemValue}
+            onChange={props.updateItemValue("featuredItems", index)}
             data-index={index}
           />
           <label htmlFor={`FI${index}_link`}>URL</label>
@@ -49,10 +41,13 @@ const FeaturedItemsForm = props => {
             value={obj.link}
             name="link"
             placeholder="Enter the URL for the item"
-            onChange={props.updateItemValue}
+            onChange={props.updateItemValue("featuredItems", index)}
             data-index={index}
           />
-          <button onClick={props.removeItem} data-index={index}>
+          <button
+            onClick={props.removeItem("featuredItems", index)}
+            data-index={index}
+          >
             Remove item
           </button>
         </section>
@@ -62,7 +57,10 @@ const FeaturedItemsForm = props => {
   return (
     <div>
       <h2>Featured Items</h2>
-      <button aria-label="Add a featured item" onClick={props.addItem}>
+      <button
+        aria-label="Add a featured item"
+        onClick={props.addItem("featuredItems")}
+      >
         <i className="fas fa-plus"></i>
       </button>
       {items}

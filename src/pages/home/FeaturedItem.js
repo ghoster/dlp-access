@@ -11,7 +11,7 @@ class FeaturedItem extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.tile && this.props !== prevProps) {
-      const imgUrl = this.props.tile.src.split("/").pop();
+      const imgUrl = this.props.tile.src;
       getFile(imgUrl, "image", this);
     }
   }

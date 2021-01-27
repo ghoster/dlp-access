@@ -26,9 +26,10 @@ class FileUploadField extends Component {
     if (!this.state.hasError) {
       const folder = this.state.file.type === "text/html" ? "html" : "image";
       const pathPrefix = `public/sitecontent/${folder}/${process.env.REACT_APP_REP_TYPE.toLowerCase()}/`;
+      const prefixFolder = this.props.filepath ? `${this.props.filepath}/` : "";
       Storage.configure({
         customPrefix: {
-          public: pathPrefix
+          public: `${pathPrefix}${prefixFolder}`
         }
       });
       await Storage.put(this.state.file.name, this.state.file, {
@@ -41,12 +42,15 @@ class FileUploadField extends Component {
           size: this.state.file.size
         }
       };
+      const evt = {
+        target: {
+          name: this.props.name,
+          value: `${prefixFolder}${this.state.file.name}`,
+          type: "upload"
+        }
+      };
       this.setState({ isUploaded: true }, () => {
-        this.props.setSrc(
-          this.props.context,
-          this.state.file.name,
-          this.props.name
-        );
+        this.props.setSrc(evt);
       });
       const userInfo = await Auth.currentUserPoolUser();
       let historyInfo = {

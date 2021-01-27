@@ -2,14 +2,6 @@ import React from "react";
 import { Form } from "semantic-ui-react";
 import FileUploadField from "./FileUploadField";
 
-const setImgSrc = (context, srcName, elName) => {
-  let evt = { target: { name: null, value: null, type: "upload" } };
-  evt.target.name = elName;
-  const filePrefix = `https://img.cloud.lib.vt.edu/sites/images/${process.env.REACT_APP_REP_TYPE.toLowerCase()}`;
-  evt.target.value = `${filePrefix}/${srcName}`;
-  context.updateInputValue(evt);
-};
-
 const CollectionHighlightsForm = props => {
   const items = props.highlightsList.map((obj, index) => {
     return (
@@ -17,13 +9,13 @@ const CollectionHighlightsForm = props => {
         <legend>Highlight {index + 1}:</legend>
         <section>
           <FileUploadField
-            context={props.context}
-            value={obj.img}
+            value={obj.src}
             label="Upload file: (Image file only):"
-            name={`highlightImageSrc${index}`}
+            name={`collectionHighlights_${index}`}
             placeholder="Enter image source"
             site={props.site}
-            setSrc={setImgSrc}
+            filepath="highlights"
+            setSrc={props.updateInputValue}
           />
           <label htmlFor={`highlight${index}_title`}>Title</label>
           <input
@@ -31,7 +23,7 @@ const CollectionHighlightsForm = props => {
             value={obj.title}
             name="title"
             placeholder="Enter the title for the highlight."
-            onChange={props.updateHighlightValue}
+            onChange={props.updateItemValue("collectionHighlights", index)}
             data-index={index}
           />
           <label htmlFor={`highlight${index}_link`}>Link</label>
@@ -40,7 +32,7 @@ const CollectionHighlightsForm = props => {
             value={obj.link}
             name="link"
             placeholder="Enter the link for the highlight"
-            onChange={props.updateHighlightValue}
+            onChange={props.updateItemValue("collectionHighlights", index)}
             data-index={index}
           />
           <label htmlFor={`highlight${index}_count`}>Item Count</label>
@@ -49,10 +41,13 @@ const CollectionHighlightsForm = props => {
             value={obj.itemCount}
             name="itemCount"
             placeholder="Enter the item count for this highlight"
-            onChange={props.updateHighlightValue}
+            onChange={props.updateItemValue("collectionHighlights", index)}
             data-index={index}
           />
-          <button onClick={props.removeHighlight} data-index={index}>
+          <button
+            onClick={props.removeItem("collectionHighlights", index)}
+            data-index={index}
+          >
             Remove highlight
           </button>
         </section>
@@ -64,7 +59,7 @@ const CollectionHighlightsForm = props => {
       <h2>Collection Highlights</h2>
       <button
         aria-label="Add a collection highlight"
-        onClick={props.addHighlight}
+        onClick={props.addItem("collectionHighlights")}
       >
         <i className="fas fa-plus"></i>
       </button>
@@ -80,7 +75,7 @@ const CollectionHighlights = props => {
         <strong>Collection Highlight {index + 1}</strong>
         <br />
         <p>
-          <span className="key">Image Source:</span> {obj.img}
+          <span className="key">Image Source:</span> {obj.src}
         </p>
         <p>
           <span className="key">Title:</span> {obj.title}

@@ -2,14 +2,6 @@ import React from "react";
 import { Form } from "semantic-ui-react";
 import FileUploadField from "./FileUploadField";
 
-const setImgSrc = (context, srcName, elName) => {
-  let evt = { target: { name: null, value: null, type: "upload" } };
-  evt.target.name = elName;
-  const filePrefix = `https://img.cloud.lib.vt.edu/sites/images/${process.env.REACT_APP_REP_TYPE.toLowerCase()}`;
-  evt.target.value = `${filePrefix}/${srcName}`;
-  context.updateInputValue(evt);
-};
-
 const SponsorForm = props => {
   const sponsors = props.sponsorsList.map((obj, index) => {
     return (
@@ -17,13 +9,13 @@ const SponsorForm = props => {
         <legend>Sponsor {index + 1}:</legend>
         <section>
           <FileUploadField
-            context={props.context}
-            value={obj.img}
+            value={obj.src}
             label="Upload file: (Image file only):"
-            name={`sponsorImageSrc${index}`}
+            name={`sponsors_${index}`}
             placeholder="Enter Src"
             site={props.site}
-            setSrc={setImgSrc}
+            filepath="sponsors"
+            setSrc={props.updateInputValue}
           />
           <label htmlFor={`s${index}_alt`}>Alt Text</label>
           <input
@@ -31,7 +23,7 @@ const SponsorForm = props => {
             value={obj.alt}
             name="alt"
             placeholder="Enter the sponsor's name"
-            onChange={props.updateSponsorValue}
+            onChange={props.updateItemValue("sponsors", index)}
             data-index={index}
           />
           <label htmlFor={`s${index}_link`}>URL</label>
@@ -40,10 +32,13 @@ const SponsorForm = props => {
             value={obj.link}
             name="link"
             placeholder="Enter the URL for the sponsor"
-            onChange={props.updateSponsorValue}
+            onChange={props.updateItemValue("sponsors", index)}
             data-index={index}
           />
-          <button onClick={props.removeSponsor} data-index={index}>
+          <button
+            onClick={props.removeItem("sponsors", index)}
+            data-index={index}
+          >
             Remove sponsor
           </button>
         </section>
@@ -53,7 +48,7 @@ const SponsorForm = props => {
   return (
     <div>
       <h2>Sponsors</h2>
-      <button aria-label="Add sponsor" onClick={props.addSponsor}>
+      <button aria-label="Add sponsor" onClick={props.addItem("sponsors")}>
         <i className="fas fa-plus"></i>
       </button>
       {sponsors}
@@ -68,7 +63,7 @@ const Sponsors = props => {
         <strong>Sponsor {index + 1}</strong>
         <br />
         <p>
-          <span className="key">Source:</span> {obj.img}
+          <span className="key">Source:</span> {obj.src}
         </p>
         <p>
           <span className="key">Alt text:</span> {obj.alt}

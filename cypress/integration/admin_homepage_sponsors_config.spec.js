@@ -73,7 +73,7 @@ describe("Update sponsors fields and revert", function () {
         cy.contains("Update Config").click();
         cy.contains("Sponsor 4", { timeout: 2000 }).should("be.visible");
         cy.contains(
-            "Source: https://img.cloud.lib.vt.edu/sites/images/default/sponsor4.png"
+            "Source: sponsors/sponsor4.png"
         ).should("be.visible");
         cy.contains("Alt text: Virginia Tech").should("be.visible");
         cy.contains("URL: https://vt.edu").should("be.visible");

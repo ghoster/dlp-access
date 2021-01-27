@@ -35,122 +35,35 @@ class HomepageForm extends Component {
     };
   }
 
-  updateSponsorValue = event => {
-    const { name, value, dataset } = event.target;
-    const index = dataset.index;
+  updateItemValue = (property, index) => event => {
+    const { name, value } = event.target;
     this.setState(prevState => {
-      let sponsorArray = [...prevState.formState.sponsors];
-      let sponsor = { ...sponsorArray[index], [name]: value };
-      sponsorArray[index] = sponsor;
-      return { formState: { ...prevState.formState, sponsors: sponsorArray } };
-    });
-  };
-
-  addSponsor = () => {
-    this.setState(prevState => {
-      let sponsorArray = [...prevState.formState.sponsors];
-      let index = sponsorArray.length + 1;
-      let newSponsor = {
-        alt: "",
-        img: `https://img.cloud.lib.vt.edu/sites/images/${process.env.REACT_APP_REP_TYPE.toLowerCase()}/sponsor${index}.png`,
-        link: ""
-      };
-      sponsorArray.push(newSponsor);
-      return {
-        formState: { ...prevState.formState, sponsors: sponsorArray }
-      };
-    });
-  };
-
-  removeSponsor = event => {
-    const index = event.target.dataset.index;
-    this.setState(prevState => {
-      let sponsorArray = [...prevState.formState.sponsors];
-      sponsorArray.splice(index, 1);
-      return {
-        formState: { ...prevState.formState, sponsors: sponsorArray }
-      };
-    });
-  };
-
-  updateItemValue = event => {
-    const { name, value, dataset } = event.target;
-    const index = dataset.index;
-    this.setState(prevState => {
-      let itemArray = [...prevState.formState.featuredItems];
+      let itemArray = [...prevState.formState[property]];
       let item = { ...itemArray[index], [name]: value };
       itemArray[index] = item;
       return {
-        formState: { ...prevState.formState, featuredItems: itemArray }
+        formState: { ...prevState.formState, [property]: itemArray }
       };
     });
   };
 
-  addItem = () => {
+  addItem = property => event => {
     this.setState(prevState => {
-      let itemArray = [...prevState.formState.featuredItems];
-      let index = itemArray.length + 1;
-      let newItem = {
-        altText: "",
-        src: `https://img.cloud.lib.vt.edu/sites/images/${process.env.REACT_APP_REP_TYPE.toLowerCase()}/featured_item${index}.png`,
-        cardTitle: "",
-        link: ""
-      };
+      let itemArray = [...prevState.formState[property]];
+      let newItem = {};
       itemArray.push(newItem);
       return {
-        formState: { ...prevState.formState, featuredItems: itemArray }
+        formState: { ...prevState.formState, [property]: itemArray }
       };
     });
   };
 
-  removeItem = event => {
-    const index = event.target.dataset.index;
+  removeItem = (property, index) => event => {
     this.setState(prevState => {
-      let itemArray = [...prevState.formState.featuredItems];
+      let itemArray = [...prevState.formState[property]];
       itemArray.splice(index, 1);
       return {
-        formState: { ...prevState.formState, featuredItems: itemArray }
-      };
-    });
-  };
-
-  updateHighlightValue = event => {
-    const { name, value, dataset } = event.target;
-    const index = dataset.index;
-    this.setState(prevState => {
-      let itemArray = [...prevState.formState.collectionHighlights];
-      let item = { ...itemArray[index], [name]: value };
-      itemArray[index] = item;
-      return {
-        formState: { ...prevState.formState, collectionHighlights: itemArray }
-      };
-    });
-  };
-
-  addHighlight = () => {
-    this.setState(prevState => {
-      let itemArray = [...prevState.formState.collectionHighlights];
-      let index = itemArray.length + 1;
-      let newItem = {
-        title: "",
-        img: `https://img.cloud.lib.vt.edu/sites/images/${process.env.REACT_APP_REP_TYPE.toLowerCase()}/highlight${index}.jpg`,
-        link: "",
-        itemCount: ""
-      };
-      itemArray.push(newItem);
-      return {
-        formState: { ...prevState.formState, collectionHighlights: itemArray }
-      };
-    });
-  };
-
-  removeHighlight = event => {
-    const index = event.target.dataset.index;
-    this.setState(prevState => {
-      let itemArray = [...prevState.formState.collectionHighlights];
-      itemArray.splice(index, 1);
-      return {
-        formState: { ...prevState.formState, collectionHighlights: itemArray }
+        formState: { ...prevState.formState, [property]: itemArray }
       };
     });
   };
@@ -183,23 +96,30 @@ class HomepageForm extends Component {
     }
   }
 
-  setStaticImgSrc(context, srcName) {
-    let evt = { target: { name: null, value: null, type: "upload" } };
-    evt.target.name = "staticImageSrc";
-    const filePrefix = `https://img.cloud.lib.vt.edu/sites/images/${process.env.REACT_APP_REP_TYPE.toLowerCase()}`;
-    evt.target.value = `${filePrefix}/${srcName}`;
-    context.updateInputValue(evt);
-  }
-
   updateInputValue = event => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
-    this.setState(prevState => {
-      return {
-        formState: { ...prevState.formState, [name]: value }
-      };
-    });
+    const property_index = target.name.split("_");
+    let name = "";
+    let index = 0;
+    if (property_index.length === 2) {
+      [name, index] = property_index;
+      this.setState(prevState => {
+        let itemArray = [...prevState.formState[name]];
+        let item = { ...itemArray[index], src: value };
+        itemArray[index] = item;
+        return {
+          formState: { ...prevState.formState, [name]: itemArray }
+        };
+      });
+    } else if (property_index.length === 1) {
+      [name] = property_index;
+      this.setState(prevState => {
+        return {
+          formState: { ...prevState.formState, [name]: value }
+        };
+      });
+    }
   };
 
   handleSubmit = async () => {
@@ -284,13 +204,12 @@ class HomepageForm extends Component {
           <section className="static-image">
             <h3>Static Image</h3>
             <FileUploadField
-              context={this}
               value={this.state.formState.staticImageSrc}
               label={this.fileUploadLabel(this.state.formState.staticImageSrc)}
               name="staticImageSrc"
               placeholder="Enter Src"
               site={this.state.site}
-              setSrc={this.setStaticImgSrc.bind(this)}
+              setSrc={this.updateInputValue}
             />
             <Form.Input
               label="Alt Text"
@@ -314,26 +233,26 @@ class HomepageForm extends Component {
         <FeaturedItemsForm
           itemList={this.state.formState.featuredItems}
           updateItemValue={this.updateItemValue}
+          updateInputValue={this.updateInputValue}
           addItem={this.addItem}
           removeItem={this.removeItem}
           site={this.state.site}
-          context={this}
         />
         <SponsorForm
           sponsorsList={this.state.formState.sponsors}
-          updateSponsorValue={this.updateSponsorValue}
-          addSponsor={this.addSponsor}
-          removeSponsor={this.removeSponsor}
+          updateItemValue={this.updateItemValue}
+          updateInputValue={this.updateInputValue}
+          addItem={this.addItem}
+          removeItem={this.removeItem}
           site={this.state.site}
-          context={this}
         />
         <CollectionHighlightsForm
           highlightsList={this.state.formState.collectionHighlights}
-          updateHighlightValue={this.updateHighlightValue}
-          addHighlight={this.addHighlight}
-          removeHighlight={this.removeHighlight}
+          updateItemValue={this.updateItemValue}
+          updateInputValue={this.updateInputValue}
+          addItem={this.addItem}
+          removeItem={this.removeItem}
           site={this.state.site}
-          context={this}
         />
         <button className="submit" onClick={this.handleSubmit}>
           Update Config

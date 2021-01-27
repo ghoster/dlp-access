@@ -14,7 +14,7 @@ class SiteSponsors extends Component {
   componentDidMount() {
     if (this.props.sponsors && this.props.sponsors.length !== 0) {
       this.props.sponsors.map(sponsor => {
-        return getImgUrl(sponsor.img.split("/").pop()).then(src => {
+        return getImgUrl(sponsor.src).then(src => {
           const imgUrls = this.state.sponsorImgs.slice();
           imgUrls.push(src);
           this.setState({ sponsorImgs: imgUrls });
